@@ -27,9 +27,17 @@ router.post('/login', async (req, res) => {
             });
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
+        /*const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
+            return res.status(401).json({
+                success: false,
+                message: 'Contraseña incorrecta.',
+            });
+        }*/
+
+        // Comparar la contraseña directamente (texto plano)
+        if (password !== user.password) {
             return res.status(401).json({
                 success: false,
                 message: 'Contraseña incorrecta.',
@@ -38,8 +46,7 @@ router.post('/login', async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            message: 'Inicio de sesión exitoso.',
-            user: { id: user.id, email: user.email },
+            user: { id: user.id, email: user.email, userType: user.userType },
             // Aquí puedes devolver un token JWT si es necesario
         });
     } catch (err) {
