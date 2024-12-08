@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             targetNamespace="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService">
+  <types>
+    <xsd:schema targetNamespace="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService">
+      <xsd:element name="registerLoanRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="userId" type="xsd:string" />
+            <xsd:element name="bookId" type="xsd:string" />
+            <xsd:element name="loanDate" type="xsd:string" />
+            <xsd:element name="returnDate" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="registerLoanResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="confirmation" type="xsd:string" />
+            <xsd:element name="status" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+
+  <message name="registerLoanRequest">
+    <part name="parameters" element="tns:registerLoanRequest"/>
+  </message>
+  <message name="registerLoanResponse">
+    <part name="parameters" element="tns:registerLoanResponse"/>
+  </message>
+
+  <portType name="LibraryPortType">
+    <operation name="registerLoan">
+      <input message="tns:registerLoanRequest"/>
+      <output message="tns:registerLoanResponse"/>
+    </operation>
+  </portType>
+
+  <binding name="LibraryBinding" type="tns:LibraryPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="registerLoan">
+      <soap:operation soapAction="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService/registerLoan"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <service name="LibraryService">
+    <port name="LibraryPort" binding="tns:LibraryBinding">
+      <soap:address location="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/soap"/>
+    </port>
+  </service>
+</definitions>

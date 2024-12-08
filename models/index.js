@@ -1,8 +1,11 @@
 const User = require('./user.model');
 const Book = require('./book');
+const Loan = require('./loan');
 
-// Relación entre User y Course
+// Relacionar modelos
+User.hasMany(Loan, { foreignKey: 'userId' });
+Book.hasMany(Loan, { foreignKey: 'bookId' });
+Loan.belongsTo(User, { foreignKey: 'userId' });
+Loan.belongsTo(Book, { foreignKey: 'bookId' });
 
-// Relación entre User y Subscription
-
-module.exports = { User, Book};
+module.exports = { User, Book, Loan };

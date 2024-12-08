@@ -4,17 +4,15 @@ const { connectDB, sequelize } = require('./config/database');
 const userRoutes = require('./routes/user.routes');
 const bookRoutes = require('./routes/book.routes');
 const { createDefaultBooks } = require('./services/book.service');
-
+const soapService = require('./services/soap.service');
 const app = express();
 
+// Configurar el servicio SOAP
+soapService(app);
 // Usar CORS globalmente
 app.use(cors()); // Habilita CORS para todas las rutas
 
 app.use(express.json());
-// Redirige la raíz (/) a /login
-app.get('/', (req, res) => {
-    res.redirect('/login');
-});
 
 app.use('/api/users', userRoutes);
 app.use('/api/books', bookRoutes);
