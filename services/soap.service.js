@@ -82,16 +82,17 @@ const service = {
                     
 
                     // Mapear resultados para devolver los datos en un formato legible
-                    const loanData = loans.map(loan => ({
-                        id: loan.id,
-                        userId: loan.userId,
-                        bookId: loan.bookId,
-                        loanDate: loan.loanDate,
-                        returnDate: loan.returnDate,
-                        status: loan.status,
-                        bookTitle: loan.book?.title || null,
-                        userName: `${loan.user?.firstName || ''} ${loan.user?.lastName || ''}`,
-                    }));
+const loanData = loans.map(loan => ({
+    id: loan.id,
+    userId: loan.userId,
+    bookId: loan.bookId,
+    loanDate: loan.loanDate ? loan.loanDate.toISOString() : null,
+    returnDate: loan.returnDate ? loan.returnDate.toISOString() : null,
+    status: loan.status,
+    bookTitle: loan.book?.title || null,
+    userName: `${loan.user?.firstName || ''} ${loan.user?.lastName || ''}`,
+}));
+
 
                     return { loans: loanData, status: "Success" };
                 } catch (error) {
