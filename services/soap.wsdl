@@ -42,6 +42,61 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+
+      <!-- Obtener todos los préstamos -->
+      <xsd:element name="getAllLoansRequest"/>
+      <xsd:element name="getAllLoansResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="loans" minOccurs="0" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="id" type="xsd:string"/>
+                  <xsd:element name="userId" type="xsd:string"/>
+                  <xsd:element name="bookId" type="xsd:string"/>
+                  <xsd:element name="loanDate" type="xsd:string" minOccurs="0"/>
+                  <xsd:element name="returnDate" type="xsd:string" minOccurs="0"/>
+                  <xsd:element name="status" type="xsd:string"/>
+                  <xsd:element name="bookTitle" type="xsd:string" minOccurs="0"/>
+                  <xsd:element name="userName" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="status" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <!-- Obtener préstamos por userId -->
+      <xsd:element name="getLoansByUserIdRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="userId" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getLoansByUserIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="loans" minOccurs="0" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="id" type="xsd:string"/>
+                  <xsd:element name="userId" type="xsd:string"/>
+                  <xsd:element name="bookId" type="xsd:string"/>
+                  <xsd:element name="loanDate" type="xsd:string" minOccurs="0"/>
+                  <xsd:element name="returnDate" type="xsd:string" minOccurs="0"/>
+                  <xsd:element name="status" type="xsd:string"/>
+                  <xsd:element name="bookTitle" type="xsd:string" minOccurs="0"/>
+                  <xsd:element name="userName" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="status" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
     </xsd:schema>
   </types>
 
@@ -64,6 +119,12 @@
   <message name="getAllLoansResponse">
     <part name="parameters" element="tns:getAllLoansResponse"/>
   </message>
+  <message name="getLoansByUserIdRequest">
+    <part name="parameters" element="tns:getLoansByUserIdRequest"/>
+  </message>
+  <message name="getLoansByUserIdResponse">
+    <part name="parameters" element="tns:getLoansByUserIdResponse"/>
+  </message>
 
   <!-- Port Type -->
   <portType name="LibraryPortType">
@@ -75,10 +136,14 @@
       <input message="tns:returnLoanRequest"/>
       <output message="tns:returnLoanResponse"/>
     </operation>
-      <operation name="getAllLoans">
-        <input message="tns:getAllLoansRequest"/>
-        <output message="tns:getAllLoansResponse"/>
-      </operation>
+    <operation name="getAllLoans">
+      <input message="tns:getAllLoansRequest"/>
+      <output message="tns:getAllLoansResponse"/>
+    </operation>
+    <operation name="getLoansByUserId">
+      <input message="tns:getLoansByUserIdRequest"/>
+      <output message="tns:getLoansByUserIdResponse"/>
+    </operation>
   </portType>
 
   <!-- Binding -->
@@ -104,6 +169,15 @@
     </operation>
     <operation name="getAllLoans">
       <soap:operation soapAction="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService/getAllLoans"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getLoansByUserId">
+      <soap:operation soapAction="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService/getLoansByUserId"/>
       <input>
         <soap:body use="literal"/>
       </input>
