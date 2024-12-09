@@ -6,6 +6,7 @@
              targetNamespace="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService">
   <types>
     <xsd:schema targetNamespace="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService">
+      <!-- Registro de Préstamos -->
       <xsd:element name="registerLoanRequest">
         <xsd:complexType>
           <xsd:sequence>
@@ -24,23 +25,53 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+
+      <!-- Registrar Devolución -->
+      <xsd:element name="returnLoanRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="loanId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="returnLoanResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="confirmation" type="xsd:string" />
+            <xsd:element name="status" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </types>
 
+  <!-- Messages -->
   <message name="registerLoanRequest">
     <part name="parameters" element="tns:registerLoanRequest"/>
   </message>
   <message name="registerLoanResponse">
     <part name="parameters" element="tns:registerLoanResponse"/>
   </message>
+  <message name="returnLoanRequest">
+    <part name="parameters" element="tns:returnLoanRequest"/>
+  </message>
+  <message name="returnLoanResponse">
+    <part name="parameters" element="tns:returnLoanResponse"/>
+  </message>
 
+  <!-- Port Type -->
   <portType name="LibraryPortType">
     <operation name="registerLoan">
       <input message="tns:registerLoanRequest"/>
       <output message="tns:registerLoanResponse"/>
     </operation>
+    <operation name="returnLoan">
+      <input message="tns:returnLoanRequest"/>
+      <output message="tns:returnLoanResponse"/>
+    </operation>
   </portType>
 
+  <!-- Binding -->
   <binding name="LibraryBinding" type="tns:LibraryPortType">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <operation name="registerLoan">
@@ -52,8 +83,18 @@
         <soap:body use="literal"/>
       </output>
     </operation>
+    <operation name="returnLoan">
+      <soap:operation soapAction="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService/returnLoan"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
   </binding>
 
+  <!-- Service -->
   <service name="LibraryService">
     <port name="LibraryPort" binding="tns:LibraryBinding">
       <soap:address location="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/soap"/>
