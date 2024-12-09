@@ -1,5 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
+const Book = require('./book'); // Importa el modelo Book
+const User = require('./user.model'); // Importa el modelo User
 
 const Loan = sequelize.define('Loan', {
   id: {
@@ -39,5 +41,9 @@ const Loan = sequelize.define('Loan', {
   tableName: 'loans', // Nombre de la tabla en la BD
   timestamps: true,
 });
+
+// Asociaciones
+Loan.belongsTo(Book, { as: 'book', foreignKey: 'bookId' }); // Asociación con Book
+Loan.belongsTo(User, { as: 'user', foreignKey: 'userId' }); // Asociación con User
 
 module.exports = Loan;

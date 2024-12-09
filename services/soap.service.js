@@ -1,5 +1,4 @@
-const { Loan, Book } = require('../models'); // Importar modelos necesarios
-const moment = require('moment'); // Para calcular fechas y multas (asegúrate de instalarlo con `npm install moment`)
+const { Loan, Book, User } = require('../models'); // Importar modelos necesarios
 
 const service = {
     LibraryService: {
@@ -45,32 +44,12 @@ const service = {
                         return { confirmation: "Loan already returned", status: "Failed" };
                     }
 
-                    // Actualizar el estado del libro a "disponible"
-                    const book = await Book.findByPk(loan.bookId);
-                    if (!book) {
-                        return { confirmation: "Book not found", status: "Failed" };
-                    }
-
-                    book.isLoaned = false;
-                    await book.save();
-
-                    // Calcular multas en caso de retraso
-                    const today = moment();
-                    const returnDate = moment(loan.returnDate);
-                    let fine = 0;
-
-                    if (today.isAfter(returnDate)) {
-                        const daysLate = today.diff(returnDate, 'days');
-                        fine = daysLate * 5; // Por ejemplo, $5 por día de retraso
-                    }
-
                     // Actualizar el préstamo como "returned"
                     loan.status = 'returned';
-                    loan.fine = fine; // Suponiendo que agregaste un campo `fine` en tu modelo Loan
                     await loan.save();
 
                     return {
-                        confirmation: `Loan returned successfully with fine: $${fine}`,
+                        confirmation: `Loan returned successfully`,
                         status: "Success",
                     };
                 } catch (error) {
@@ -81,7 +60,48 @@ const service = {
                     };
                 }
             },
-            
+            getAllLoans: async function () {
+                try {
+                    console.log("Recuperando todos los préstamos...");
+
+                    // Recuperar todos los préstamos con asociaciones (opcional)
+                    const loans = await Loan.findAll({
+                        include: [
+                            {
+                                model: Book,
+                                as: 'book', // Alias definido en la asociación con Book
+                                attributes: ['title', 'author', 'category'], // Incluye solo los campos necesarios del libro
+                            },
+                            {
+                                model: User,
+                                as: 'user', // Alias definido en la asociación con User
+                                attributes: ['firstName', 'lastName', 'email'], // Incluye solo los campos necesarios del usuario
+                            },
+                        ],
+                    });
+                    
+
+                    // Mapear resultados para devolver los datos en un formato legible
+                    const loanData = loans.map(loan => ({
+                        id: loan.id,
+                        userId: loan.userId,
+                        bookId: loan.bookId,
+                        loanDate: loan.loanDate,
+                        returnDate: loan.returnDate,
+                        status: loan.status,
+                        bookTitle: loan.book?.title || null,
+                        userName: `${loan.user?.firstName || ''} ${loan.user?.lastName || ''}`,
+                    }));
+
+                    return { loans: loanData, status: "Success" };
+                } catch (error) {
+                    console.error("Error al recuperar los préstamos:", error);
+                    return {
+                        loans: [],
+                        status: "Failed",
+                    };
+                }
+            },
         },
     },
 };

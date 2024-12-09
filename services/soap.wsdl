@@ -58,6 +58,12 @@
   <message name="returnLoanResponse">
     <part name="parameters" element="tns:returnLoanResponse"/>
   </message>
+  <message name="getAllLoansRequest">
+    <part name="parameters" element="tns:getAllLoansRequest"/>
+  </message>
+  <message name="getAllLoansResponse">
+    <part name="parameters" element="tns:getAllLoansResponse"/>
+  </message>
 
   <!-- Port Type -->
   <portType name="LibraryPortType">
@@ -69,6 +75,10 @@
       <input message="tns:returnLoanRequest"/>
       <output message="tns:returnLoanResponse"/>
     </operation>
+      <operation name="getAllLoans">
+        <input message="tns:getAllLoansRequest"/>
+        <output message="tns:getAllLoansResponse"/>
+      </operation>
   </portType>
 
   <!-- Binding -->
@@ -85,6 +95,15 @@
     </operation>
     <operation name="returnLoan">
       <soap:operation soapAction="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService/returnLoan"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getAllLoans">
+      <soap:operation soapAction="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService/getAllLoans"/>
       <input>
         <soap:body use="literal"/>
       </input>
