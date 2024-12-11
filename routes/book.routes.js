@@ -1,5 +1,8 @@
 const express = require('express');
 const bookController = require('../controllers/book.controller');
+const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
+const SECRET_KEY = 'your-secret-key';
 
 const router = express.Router();
 router.get('/search', bookController.searchBooks); // Para búsqueda por título o filtro por categoría
