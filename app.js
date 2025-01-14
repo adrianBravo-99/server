@@ -3,7 +3,10 @@ const cors = require('cors');
 const { connectDB, sequelize } = require('./config/database');
 const userRoutes = require('./routes/user.routes');
 const bookRoutes = require('./routes/book.routes');
+const libraryRoutes = require('./routes/library.routes');
+
 const { createDefaultBooks } = require('./services/book.service');
+const { createDefaultLibraries } = require('./services/library.service');
 const soapService = require('./services/soap.service');
 const { authenticateToken } = require('./auth.middleware'); // Importa el middleware de autenticación
 
@@ -16,7 +19,7 @@ app.use(express.json()); // Middleware para parsear JSON en las solicitudes
 
 // Middleware para validar el origen o referer
 app.use((req, res, next) => {
-  const allowedReferer = 'https://fantastic-fiesta-j9xv499j4g2p9rr-3000.app.github.dev';
+  const allowedReferer = 'http://localhost:3000/';
   const referer = req.headers.referer || req.headers.origin;
 
   if (referer && referer.startsWith(allowedReferer)) {
@@ -32,6 +35,7 @@ soapService(app);
 // Rutas protegidas por API token
 app.use('/api/users', userRoutes); // Rutas relacionadas con usuarios
 app.use('/api/books', bookRoutes); // Rutas relacionadas con libros
+app.use('/api/libraries', libraryRoutes);
 
 // Ruta de autenticación para generar un token (no protegida)
 app.post('/login', (req, res) => {
@@ -63,7 +67,7 @@ const main = async () => {
     // Iniciar el servidor
     app.listen(PORT, () => {
       console.log(`Servidor corriendo en: http://localhost:${PORT}`);
-      console.log(`URL pública: https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/`);
+      console.log(`URL pública: http://localhost:4000/`);
     });
   } catch (error) {
     console.error('Error al inicializar la aplicación:', error.message);
@@ -76,6 +80,7 @@ const initializeDefaults = async () => {
   try {
     console.log('Creando libros por defecto...');
     await createDefaultBooks();
+    await createDefaultLibraries();
     console.log('Libros por defecto creados con éxito.');
   } catch (error) {
     console.error('Error al crear libros por defecto:', error.message);

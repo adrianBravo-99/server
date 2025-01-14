@@ -11,6 +11,7 @@ const createUser = async (data) => {
     .setLastName(user.lastName)
     .setEmail(user.email)
     .setUserType(user.userType)
+    .setLibraryId(user.libraryId)
     .build();
 };
 

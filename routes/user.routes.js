@@ -46,7 +46,7 @@ router.post('/login', async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            user: { id: user.id, email: user.email, userType: user.userType },
+            user: { id: user.id, email: user.email, userType: user.userType, libraryId: user.libraryId },
             // Aquí puedes devolver un token JWT si es necesario
         });
     } catch (err) {

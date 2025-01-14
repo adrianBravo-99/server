@@ -28,6 +28,11 @@ const User = sequelize.define('User', {
     type: DataTypes.ENUM('admin', 'creator', 'consumer'),
     allowNull: false,
   },
+  libraryId: {
+    type: DataTypes.UUID, // Usamos UUID para que sea compatible con la tabla `libraries`
+    allowNull: true, // No obligatorio
+    defaultValue: null, // Valor por defecto
+  },
 }, {
   tableName: 'users',  // Asegúrate de que sea el mismo nombre que tu tabla
   timestamps: true,

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
              xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-             xmlns:tns="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService"
+             xmlns:tns="http://localhost:4000/LibraryService"
              xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-             targetNamespace="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService">
+             targetNamespace="http://localhost:4000/LibraryService">
   <types>
-    <xsd:schema targetNamespace="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService">
+    <xsd:schema targetNamespace="http://localhost:4000/LibraryService">
       <!-- Registro de Préstamos -->
       <xsd:element name="registerLoanRequest">
         <xsd:complexType>
@@ -150,7 +150,7 @@
   <binding name="LibraryBinding" type="tns:LibraryPortType">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <operation name="registerLoan">
-      <soap:operation soapAction="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService/registerLoan"/>
+      <soap:operation soapAction="http://localhost:4000/LibraryService/registerLoan"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -159,7 +159,7 @@
       </output>
     </operation>
     <operation name="returnLoan">
-      <soap:operation soapAction="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService/returnLoan"/>
+      <soap:operation soapAction="http://localhost:4000/LibraryService/returnLoan"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -168,7 +168,7 @@
       </output>
     </operation>
     <operation name="getAllLoans">
-      <soap:operation soapAction="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService/getAllLoans"/>
+      <soap:operation soapAction="http://localhost:4000/LibraryService/getAllLoans"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -177,7 +177,7 @@
       </output>
     </operation>
     <operation name="getLoansByUserId">
-      <soap:operation soapAction="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/LibraryService/getLoansByUserId"/>
+      <soap:operation soapAction="http://localhost:4000/LibraryService/getLoansByUserId"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -190,7 +190,7 @@
   <!-- Service -->
   <service name="LibraryService">
     <port name="LibraryPort" binding="tns:LibraryBinding">
-      <soap:address location="https://stunning-fortnight-j9xv4995xw3q6j6-4000.app.github.dev/soap"/>
+      <soap:address location="http://localhost:4000/soap"/>
     </port>
   </service>
 </definitions>
