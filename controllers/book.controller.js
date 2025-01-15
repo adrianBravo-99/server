@@ -76,21 +76,19 @@ const returnBook = async (req, res) => {
 
 const searchBooks = async (req, res) => {
   try {
-    const { titulo, categoria, rangoInicio, rangoFin } = req.query;
+    const { titulo, categoria, rangoInicio, rangoFin, libraryId } = req.query;
 
     if ((rangoInicio && isNaN(parseInt(rangoInicio))) || (rangoFin && isNaN(parseInt(rangoFin)))) {
       return res.status(400).json({ error: "Invalid range values." });
     }
 
-    const results = await bookService.searchBooks({ titulo, categoria, rangoInicio, rangoFin });
+    const results = await bookService.searchBooks({ titulo, categoria, rangoInicio, rangoFin, libraryId });
     res.json(results);
   } catch (error) {
     console.error("Error searching books:", error);
     res.status(500).json({ error: error.message });
   }
 };
-
-
 
 const checkBookAvailability = async (req, res) => {
   try {

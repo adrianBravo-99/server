@@ -1,10 +1,12 @@
 // controllers/user.controller.js
 const userService = require('../services/user.service');
 
+
 const getAllUsers = async (req, res) => {
   try {
-    const users = await userService.getAllUsers();
-    res.json(users); // Los usuarios ya vienen formateados como DTOs
+    const { libraryId } = req.query; // <= Tomamos el libraryId
+    const users = await userService.getAllUsers(libraryId); // <= Se lo pasamos al servicio
+    res.json(users);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

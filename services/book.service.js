@@ -103,10 +103,11 @@ const returnBook = async (id) => {
     .build();
 };
 
-const searchBooks = async ({ titulo}) => {
+const searchBooks = async ({ titulo, libraryId }) => {
   const where = {};
 
-  if (titulo) where.title = { [Op.iLike]: `%${titulo}%` }; // Búsqueda por título
+  if (titulo) where.title = { [Op.iLike]: `%${titulo}%` };
+  if (libraryId) where.libraryId = libraryId; // <= Filtro por libraryId
 
   const books = await Book.findAll({ where });
 

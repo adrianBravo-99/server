@@ -52,9 +52,16 @@ const getUserById = async (id) => {
     .build();
 };
 
-// Obtener todos los usuarios
-const getAllUsers = async () => {
-  const users = await User.findAll();
+const getAllUsers = async (libraryId) => {
+  const where = {};
+
+  // Filtramos por libraryId si está presente
+  if (libraryId) {
+    where.libraryId = libraryId;
+  }
+
+  const users = await User.findAll({ where });
+  
   return users.map(user =>
     new UserDTOBuilder()
       .setId(user.id)
@@ -65,5 +72,6 @@ const getAllUsers = async () => {
       .build()
   );
 };
+
 
 module.exports = { createUser, updateUser, deleteUser, getUserById, getAllUsers };
