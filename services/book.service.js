@@ -103,20 +103,17 @@ const returnBook = async (id) => {
     .build();
 };
 
-const searchBooks = async ({ titulo, categoria, rangoInicio, rangoFin }) => {
+const searchBooks = async ({ titulo}) => {
   const where = {};
 
   if (titulo) where.title = { [Op.iLike]: `%${titulo}%` }; // Búsqueda por título
-  if (categoria) where.category = categoria; // Coincidencia exacta de categoría
-  if (rangoInicio && rangoFin) {
-    where.publicationYear = { [Op.between]: [parseInt(rangoInicio), parseInt(rangoFin)] }; // Rango de años
-  }
 
   const books = await Book.findAll({ where });
 
   return books.map(book =>
     new BookDTOBuilder()
       .setId(book.id)
+      .setLibraryId(book.libraryId)
       .setTitle(book.title)
       .setAuthor(book.author)
       .setPrice(book.price)

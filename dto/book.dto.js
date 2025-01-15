@@ -1,6 +1,7 @@
 class BookDTO {
-    constructor({ id, title, author, price, isRented, isLoaned }) {
+    constructor({ id, libraryId, title, author, price, isRented, isLoaned }) {
       this.id = id;
+      this.libraryId = libraryId
       this.title = title;
       this.author = author;
       this.price = price;
@@ -16,6 +17,11 @@ class BookDTO {
   
     setId(id) {
       this.book.id = id;
+      return this;
+    }
+
+    setLibraryId(libraryId){
+      this.book.libraryId = libraryId;
       return this;
     }
   
