@@ -136,7 +136,50 @@ const service = {
                         status: "Failed",
                     };
                 }
-            }
+            },
+            getLoansByLibraryId: async function (args) {
+                try {
+                    console.log("Recuperando préstamos para la biblioteca:", args.libraryId);
+            
+                    // Buscar préstamos filtrados por libraryId
+                    const loans = await Loan.findAll({
+                        where: { libraryId: args.libraryId },
+                        include: [
+                            {
+                                model: Book,
+                                as: 'book',
+                                attributes: ['title', 'author', 'category'], // Atributos del libro
+                            },
+                            {
+                                model: User,
+                                as: 'user',
+                                attributes: ['firstName', 'lastName', 'email'], // Atributos del usuario
+                            },
+                        ],
+                    });
+            
+                    // Mapear los datos para estructurar la respuesta SOAP
+                    const loanData = loans.map((loan) => ({
+                        id: loan.id,
+                        userId: loan.userId,
+                        bookId: loan.bookId,
+                        libraryId: loan.libraryId,
+                        loanDate: loan.loanDate ? loan.loanDate.toISOString() : null,
+                        returnDate: loan.returnDate ? loan.returnDate.toISOString() : null,
+                        status: loan.status,
+                        bookTitle: loan.book?.title || null,
+                        userName: `${loan.user?.firstName || ''} ${loan.user?.lastName || ''}`,
+                    }));
+            
+                    return { loans: loanData, status: "Success" };
+                } catch (error) {
+                    console.error("Error al recuperar préstamos por libraryId:", error);
+                    return {
+                        loans: [],
+                        status: "Failed",
+                    };
+                }
+            }            
         },
     },
 };

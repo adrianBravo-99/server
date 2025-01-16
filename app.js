@@ -60,11 +60,11 @@ const main = async () => {
     await connectDB();
 
     // Sincronizar las tablas de la base de datos
-    await sequelize.sync({ force: true }); // Cambiar a `true` solo para recrear tablas (borrar datos)
+    await sequelize.sync({ force: false }); // Cambiar a `true` solo para recrear tablas (borrar datos)
     console.log('Tablas sincronizadas correctamente.');
 
     // Inicializar datos por defecto (opcional, descomenta para usar)
-    await initializeDefaults();
+    //await initializeDefaults();
 
     // Iniciar el servidor
     app.listen(PORT, () => {
@@ -81,8 +81,8 @@ const main = async () => {
 const initializeDefaults = async () => {
   try {
     console.log('Creando libros por defecto...');
-    await createDefaultBooks();
     await createDefaultLibraries();
+    await createDefaultBooks();
     await createDefaultUser();
     console.log('Libros por defecto creados con éxito.');
   } catch (error) {

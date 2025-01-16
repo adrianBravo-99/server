@@ -100,6 +100,37 @@
         </xsd:complexType>
       </xsd:element>
 
+      <xsd:element name="getLoansByLibraryIdRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="libraryId" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getLoansByLibraryIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="loans" minOccurs="0" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="id" type="xsd:string"/>
+                  <xsd:element name="userId" type="xsd:string"/>
+                  <xsd:element name="bookId" type="xsd:string"/>
+                  <xsd:element name="libraryId" type="xsd:string"/>
+                  <xsd:element name="loanDate" type="xsd:string"/>
+                  <xsd:element name="returnDate" type="xsd:string"/>
+                  <xsd:element name="status" type="xsd:string"/>
+                  <xsd:element name="bookTitle" type="xsd:string"/>
+                  <xsd:element name="userName" type="xsd:string"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="status" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+
     </xsd:schema>
   </types>
 
@@ -128,6 +159,12 @@
   <message name="getLoansByUserIdResponse">
     <part name="parameters" element="tns:getLoansByUserIdResponse"/>
   </message>
+    <message name="getLoansByLibraryIdRequest">
+    <part name="parameters" element="tns:getLoansByLibraryIdRequest"/>
+  </message>
+  <message name="getLoansByLibraryIdResponse">
+    <part name="parameters" element="tns:getLoansLibraryIdResponse"/>
+  </message>
 
   <!-- Port Type -->
   <portType name="LibraryPortType">
@@ -146,6 +183,10 @@
     <operation name="getLoansByUserId">
       <input message="tns:getLoansByUserIdRequest"/>
       <output message="tns:getLoansByUserIdResponse"/>
+    </operation>
+    <operation name="getLoansByLibraryId">
+      <input message="tns:getLoansByLibraryIdRequest"/>
+      <output message="tns:getLoansByLibraryIdResponse"/>
     </operation>
   </portType>
 
@@ -181,6 +222,15 @@
     </operation>
     <operation name="getLoansByUserId">
       <soap:operation soapAction="http://localhost:4000/LibraryService/getLoansByUserId"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getLoansByLibraryId">
+      <soap:operation soapAction="http://localhost:4000/LibraryService/getLoansByLibraryId"/>
       <input>
         <soap:body use="literal"/>
       </input>

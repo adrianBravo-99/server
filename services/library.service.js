@@ -64,10 +64,8 @@ const getAllLibraries = async () => {
 // Crear bibliotecas por defecto
 const createDefaultLibraries = async () => {
   const defaultLibraries = [
-    { name: 'Biblioteca Sangolquí', address: 'Calle Principal #123' },
-    { name: 'Biblioteca Alejandro Segovia', address: 'Av. Amazonas y República' },
-    { name: 'Biblioteca Santo Domingo', address: 'Av. Tsáchila y 10 de Agosto' },
-    { name: 'Biblioteca Latacunga', address: 'Calle Bolívar y Montalvo' },
+    { id: '7c2582cb-1d01-4635-917d-0e3fb23bb4c4', name: 'Biblioteca Sangolquí', address: 'Matriz' },
+    { id: '977f2a17-4701-465a-9c1d-ef96c39d81cd', name: 'Biblioteca Latacunga', address: 'Sucursal' },
   ];
 
   await Library.bulkCreate(defaultLibraries);

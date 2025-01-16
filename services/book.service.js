@@ -140,6 +140,7 @@ const getBookAvailability = async (id) => {
 const createDefaultBooks = async () => {
   const defaultBooks = [
     {
+      libraryId: '7c2582cb-1d01-4635-917d-0e3fb23bb4c4',
       title: 'Don Quijote de la Mancha',
       author: 'Miguel de Cervantes',
       price: 9.99,
@@ -150,6 +151,7 @@ const createDefaultBooks = async () => {
       location: 'Estantería A1',
     },
     {
+      libraryId: '7c2582cb-1d01-4635-917d-0e3fb23bb4c4',
       title: 'Cien años de soledad',
       author: 'Gabriel García Márquez',
       price: 12.99,
@@ -160,6 +162,7 @@ const createDefaultBooks = async () => {
       location: 'Estantería B3',
     },
     {
+      libraryId: '7c2582cb-1d01-4635-917d-0e3fb23bb4c4',
       title: 'El principito',
       author: 'Antoine de Saint-Exupéry',
       price: 8.99,
@@ -170,6 +173,7 @@ const createDefaultBooks = async () => {
       location: 'Estantería C1',
     },
     {
+      libraryId: '977f2a17-4701-465a-9c1d-ef96c39d81cd',
       title: '1984',
       author: 'George Orwell',
       price: 10.99,
@@ -180,6 +184,7 @@ const createDefaultBooks = async () => {
       location: 'Estantería D2',
     },
     {
+      libraryId: '977f2a17-4701-465a-9c1d-ef96c39d81cd',
       title: 'Orgullo y prejuicio',
       author: 'Jane Austen',
       price: 11.99,
@@ -188,56 +193,6 @@ const createDefaultBooks = async () => {
       category: 'Romance',
       publicationYear: 1813,
       location: 'Estantería E5',
-    },
-    {
-      title: 'Matar a un ruiseñor',
-      author: 'Harper Lee',
-      price: 10.49,
-      isRented: false,
-      isLoaned: false,
-      category: 'Ficción',
-      publicationYear: 1960,
-      location: 'Estantería F4',
-    },
-    {
-      title: 'Crimen y castigo',
-      author: 'Fiódor Dostoyevski',
-      price: 13.99,
-      isRented: false,
-      isLoaned: false,
-      category: 'Filosofía',
-      publicationYear: 1866,
-      location: 'Estantería G2',
-    },
-    {
-      title: 'El Gran Gatsby',
-      author: 'F. Scott Fitzgerald',
-      price: 9.49,
-      isRented: false,
-      isLoaned: false,
-      category: 'Ficción',
-      publicationYear: 1925,
-      location: 'Estantería H1',
-    },
-    {
-      title: 'La Odisea',
-      author: 'Homero',
-      price: 14.99,
-      isRented: false,
-      isLoaned: false,
-      category: 'Clásicos',
-      publicationYear: -800, // Aproximado
-      location: 'Estantería J3',
-    },
-    {
-      title: 'Rayuela',
-      author: 'Julio Cortázar',
-      price: 12.49,
-      isRented: false,
-      isLoaned: false,
-      category: 'Ficción',
-      publicationYear: 1963,
-      location: 'Estantería K5',
     },
   ];
 

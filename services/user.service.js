@@ -77,6 +77,10 @@ const getAllUsers = async (libraryId) => {
 const createDefaultUser = async () => {
   const defaultUser = [
     { firstName: 'Root', lastName: 'Root', email: 'root@mail.com', password: '12345678', userType: 'creator' },
+    { firstName: 'Adrian', lastName: 'Bravo', email: 'adrian@mail.com', password: '12345678', userType: 'admin', libraryId: '7c2582cb-1d01-4635-917d-0e3fb23bb4c4' },
+    { firstName: 'Kathy', lastName: 'Armendariz', email: 'kathy@mail.com', password: '12345678', userType: 'consumer', libraryId: '7c2582cb-1d01-4635-917d-0e3fb23bb4c4' },
+    { firstName: 'Sebastian', lastName: 'Falconi', email: 'sebastian@mail.com', password: '12345678', userType: 'admin', libraryId: '977f2a17-4701-465a-9c1d-ef96c39d81cd' },
+    { firstName: 'Jessica', lastName: 'Andrango', email: 'jessica@mail.com', password: '12345678', userType: 'consumer', libraryId: '977f2a17-4701-465a-9c1d-ef96c39d81cd' },
   ];
 
   await User.bulkCreate(defaultUser);
