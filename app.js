@@ -7,6 +7,8 @@ const libraryRoutes = require('./routes/library.routes');
 
 const { createDefaultBooks } = require('./services/book.service');
 const { createDefaultLibraries } = require('./services/library.service');
+const { createDefaultUser } = require('./services/user.service');
+
 const soapService = require('./services/soap.service');
 const { authenticateToken } = require('./auth.middleware'); // Importa el middleware de autenticación
 
@@ -58,11 +60,11 @@ const main = async () => {
     await connectDB();
 
     // Sincronizar las tablas de la base de datos
-    await sequelize.sync({ force: false }); // Cambiar a `true` solo para recrear tablas (borrar datos)
+    await sequelize.sync({ force: true }); // Cambiar a `true` solo para recrear tablas (borrar datos)
     console.log('Tablas sincronizadas correctamente.');
 
     // Inicializar datos por defecto (opcional, descomenta para usar)
-    //await initializeDefaults();
+    await initializeDefaults();
 
     // Iniciar el servidor
     app.listen(PORT, () => {
@@ -81,6 +83,7 @@ const initializeDefaults = async () => {
     console.log('Creando libros por defecto...');
     await createDefaultBooks();
     await createDefaultLibraries();
+    await createDefaultUser();
     console.log('Libros por defecto creados con éxito.');
   } catch (error) {
     console.error('Error al crear libros por defecto:', error.message);

@@ -12,6 +12,7 @@ const service = {
                         bookId: args.bookId,
                         loanDate: args.loanDate,
                         returnDate: args.returnDate,
+                        libraryId: args.libraryId,
                         status: 'active',
                     });
 
@@ -78,6 +79,7 @@ const service = {
                         id: loan.id,
                         userId: loan.userId,
                         bookId: loan.bookId,
+                        libraryId: loan.libraryId,
                         loanDate: loan.loanDate ? loan.loanDate.toISOString() : null,
                         returnDate: loan.returnDate ? loan.returnDate.toISOString() : null,
                         status: loan.status,
@@ -118,6 +120,7 @@ const service = {
                         id: loan.id,
                         userId: loan.userId,
                         bookId: loan.bookId,
+                        libraryId: loan.libraryId,
                         loanDate: loan.loanDate ? loan.loanDate.toISOString() : null,
                         returnDate: loan.returnDate ? loan.returnDate.toISOString() : null,
                         status: loan.status,

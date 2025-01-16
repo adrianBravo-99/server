@@ -25,6 +25,11 @@ const Loan = sequelize.define('Loan', {
       key: 'id',
     },
   },
+  libraryId: {
+    type: DataTypes.UUID, // Usamos UUID para que sea compatible con la tabla `libraries`
+    allowNull: true, // No obligatorio
+    defaultValue: null, // Valor por defecto
+  },
   loanDate: {
     type: DataTypes.DATE,
     allowNull: false,

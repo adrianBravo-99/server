@@ -73,5 +73,14 @@ const getAllUsers = async (libraryId) => {
   );
 };
 
+// Crear bibliotecas por defecto
+const createDefaultUser = async () => {
+  const defaultUser = [
+    { firstName: 'Root', lastName: 'Root', email: 'root@mail.com', password: '12345678', userType: 'creator' },
+  ];
 
-module.exports = { createUser, updateUser, deleteUser, getUserById, getAllUsers };
+  await User.bulkCreate(defaultUser);
+};
+
+
+module.exports = { createUser, updateUser, deleteUser, getUserById, getAllUsers, createDefaultUser };
