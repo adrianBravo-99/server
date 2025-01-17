@@ -7,6 +7,8 @@ const createLibrary = async (data) => {
     id: library.id,
     name: library.name,
     address: library.address,
+    subscription: library.subscription,
+    status: library.status,
     createdAt: library.createdAt,
     updatedAt: library.updatedAt,
   };
@@ -22,6 +24,8 @@ const updateLibrary = async (id, data) => {
     id: updatedLibrary.id,
     name: updatedLibrary.name,
     address: updatedLibrary.address,
+    subscription: updatedLibrary.subscription,
+    status: updatedLibrary.status,
     createdAt: updatedLibrary.createdAt,
     updatedAt: updatedLibrary.updatedAt,
   };
@@ -44,6 +48,8 @@ const getLibraryById = async (id) => {
     id: library.id,
     name: library.name,
     address: library.address,
+    subscription: library.subscription,
+    status: library.status,
     createdAt: library.createdAt,
     updatedAt: library.updatedAt,
   };
@@ -56,6 +62,8 @@ const getAllLibraries = async () => {
     id: library.id,
     name: library.name,
     address: library.address,
+    subscription: library.subscription,
+    status: library.status,
     createdAt: library.createdAt,
     updatedAt: library.updatedAt,
   }));
@@ -64,8 +72,8 @@ const getAllLibraries = async () => {
 // Crear bibliotecas por defecto
 const createDefaultLibraries = async () => {
   const defaultLibraries = [
-    { id: '7c2582cb-1d01-4635-917d-0e3fb23bb4c4', name: 'Biblioteca Sangolquí', address: 'Matriz' },
-    { id: '977f2a17-4701-465a-9c1d-ef96c39d81cd', name: 'Biblioteca Latacunga', address: 'Sucursal' },
+    { id: '7c2582cb-1d01-4635-917d-0e3fb23bb4c4', name: 'Biblioteca Sangolquí', address: 'Matriz', subscription: '6 meses', status:'ACTIVE' },
+    { id: '977f2a17-4701-465a-9c1d-ef96c39d81cd', name: 'Biblioteca Latacunga', address: 'Sucursal', subscription: '3 meses', status:'ACTIVE' },
   ];
 
   await Library.bulkCreate(defaultLibraries);

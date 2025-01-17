@@ -15,6 +15,14 @@ const Library = sequelize.define('Library', {
         type: DataTypes.STRING,
         allowNull: true,
     },
+    subscription: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    status: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
 }, {
     tableName: 'libraries', // Nombre de la tabla en la base de datos
     timestamps: true, // Incluye createdAt y updatedAt automáticamente
